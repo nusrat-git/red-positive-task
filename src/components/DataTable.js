@@ -10,7 +10,7 @@ const DataTable = ({ modalIsOpen, setIsOpen, openModal, hobbies, refetch, closeM
     const handleDelete = id => {
         const result = window.confirm('Do you want to delete?');
         if (result === true) {
-            fetch(`http://localhost:5000/hobbies/${id}`, {
+            fetch(`https://red-positive-server.vercel.app/hobbies/${id}`, {
                 method: 'DELETE'
             })
                 .then(res => res.json())

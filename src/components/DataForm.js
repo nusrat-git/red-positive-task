@@ -6,7 +6,7 @@ const DataForm = ({ refetch, closeModal }) => {
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const onSubmit = data => {
-        fetch('http://localhost:5000/hobbies', {
+        fetch('https://red-positive-server.vercel.app/hobbies', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

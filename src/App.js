@@ -10,7 +10,7 @@ function App() {
   const { data: hobbies = [], refetch } = useQuery({
     queryKey: ['hobbies'],
     queryFn: async () => {
-      const res = await fetch('http://localhost:5000/hobbies');
+      const res = await fetch('https://red-positive-server.vercel.app/hobbies');
       const data = await res.json();
       return data;
     }
