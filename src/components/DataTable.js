@@ -8,16 +8,19 @@ const DataTable = ({ modalIsOpen, setIsOpen, openModal, hobbies, refetch, closeM
     const [stringified, setStringified] = useState('');
 
     const handleDelete = id => {
-        fetch(`http://localhost:5000/hobbies/${id}`, {
-            method: 'DELETE'
-        })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-                refetch();
-                setIsOpen(false);
-                toast.success('Data deleted successfully');
-            });
+        const result = window.confirm('Do you want to delete?');
+        if (result === true) {
+            fetch(`http://localhost:5000/hobbies/${id}`, {
+                method: 'DELETE'
+            })
+                .then(res => res.json())
+                .then(data => {
+                    refetch();
+                    setIsOpen(false);
+                    toast.success('Data deleted successfully');
+                });
+        }
+
     }
 
     const handleChecked = (e, hobby) => {
@@ -30,20 +33,25 @@ const DataTable = ({ modalIsOpen, setIsOpen, openModal, hobbies, refetch, closeM
             const hobbyString = JSON.stringify(hobby);
             const filteredData = checkedData.filter(filtered => filtered !== hobbyString);
             setCheckedData(filteredData);
-            setStringified(checkedData + ``);
+            setStringified(filteredData + ``);
         }
     }
 
     return (
-        <div>
-            <div className='mt-20 -mb-16 text-end w-3/4 ml-48'>
-                <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center" onClick={openModal}>Add</button>
-                {
-                    checkedData.length > 0 &&
-                    <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ml-3 mr-2">
-                        <a href={`mailto:info@redpositive.in?subject='Sending rows for hobbies'&body=${stringified}`}>Send</a>
-                    </button>
-                }
+        <div className='md:w-3/4 mx-auto'>
+            <div className='mt-20 md:-mb-16 flex items-center justify-between md:block'>
+                <div className='md:-mb-8'>
+                    <h1 className='text-2xl font-bold text-gray-600 md:text-start ml-2'>{hobbies.length} data found</h1>
+                </div>
+                <div className='md:text-end  md:ml-48 flex gap-4 md:block m-3 md:m-0'>
+                    <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center" onClick={openModal}>Add</button>
+                    {
+                        checkedData.length !== 0 &&
+                        <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center md:ml-3 md:mr-2">
+                            <a href={`mailto:info@redpositive.in?subject='Sending rows for hobbies'&body=${stringified}`}>Send</a>
+                        </button>
+                    }
+                </div>
             </div>
 
             <ModalForm
@@ -53,7 +61,9 @@ const DataTable = ({ modalIsOpen, setIsOpen, openModal, hobbies, refetch, closeM
                 closeModal={closeModal}
             ></ModalForm>
 
-            <div className="overflow-x-auto relative shadow-md sm:rounded-lg w-3/4 mx-auto my-20">
+            {
+        hobbies.length > 0 ?
+            <div className="overflow-x-auto relative shadow-md sm:rounded-lg md:mx-auto md:my-20">
                 <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
@@ -120,8 +130,11 @@ const DataTable = ({ modalIsOpen, setIsOpen, openModal, hobbies, refetch, closeM
                 </table>
                 <Toaster />
             </div>
+            :
+            <h1 className='text-3xl mt-6 font-bold text-gray-600'>No data found, please insert data</h1>
+    }
 
-        </div>
+        </div >
     );
 };
 

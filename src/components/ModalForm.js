@@ -22,6 +22,7 @@ const ModalForm = ({ modalIsOpen, setIsOpen, refetch, closeModal }) => {
                     style={customStyles}
                     shouldCloseOnOverlayClick={false}
                     contentLabel="Example Modal"
+                    ariaHideApp={false}
                 >
                     <DataForm refetch={refetch} closeModal={closeModal}></DataForm>
                 </Modal>

@@ -6,7 +6,6 @@ const DataForm = ({ refetch, closeModal }) => {
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const onSubmit = data => {
-        console.log(data);
         fetch('http://localhost:5000/hobbies', {
             method: 'POST',
             headers: {
@@ -16,7 +15,6 @@ const DataForm = ({ refetch, closeModal }) => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
                 refetch();
                 toast.success('Added successfully');
             })
@@ -25,7 +23,7 @@ const DataForm = ({ refetch, closeModal }) => {
 
     return (
         <div>
-            <form onSubmit={handleSubmit(onSubmit)} className='w-96 mx-auto'>
+            <form onSubmit={handleSubmit(onSubmit)} className='w-96 mx-auto p-4'>
 
                 <div className="mb-6">
                     <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900">Name</label>
