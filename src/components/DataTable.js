@@ -62,77 +62,75 @@ const DataTable = ({ modalIsOpen, setIsOpen, openModal, hobbies, refetch, closeM
             ></ModalForm>
 
             {
-        hobbies.length > 0 ?
-            <div className="overflow-x-auto relative shadow-md sm:rounded-lg md:mx-auto md:my-20">
-                <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                    <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                        <tr>
-                            <th scope="col" className="p-4">
-                            </th>
-                            <th scope="col" className="py-3 px-6">
-                                Serial
-                            </th>
-                            <th scope="col" className="py-3 px-6">
-                                Name
-                            </th>
-                            <th scope="col" className="py-3 px-6">
-                                Phone number
-                            </th>
-                            <th scope="col" className="py-3 px-6">
-                                Email
-                            </th>
-                            <th scope="col" className="py-3 px-6">
-                                Hobbies
-                            </th>
-                            <th scope="col" className="py-3 px-6">
-                                Action
-                            </th>
-                            <th scope="col" className="py-3 px-6">
-                                Action
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            hobbies.map((hobby, i) =>
-                                <tr className="bg-white border-b  hover:bg-gray-50" key={hobby._id}>
-                                    <td className="p-4 w-4">
-                                        <div className="flex items-center">
-                                            <input id={`checkbox-table-search-${i + 1}`} type="checkbox" className="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500" onClick={(e) => handleChecked(e, hobby)} />
-                                            <label htmlFor="checkbox-table-search-1" className="sr-only">checkbox</label>
-                                        </div>
-                                    </td>
-                                    <td className="py-4 px-6">
-                                        {i + 1}
-                                    </td>
-                                    <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap">
-                                        {hobby.name}
-                                    </th>
-                                    <td className="py-4 px-6">
-                                        {hobby.email}
-                                    </td>
-                                    <td className="py-4 px-6">
-                                        {hobby.number}
-                                    </td>
-                                    <td className="py-4 px-6">
-                                        {hobby.hobbies}
-                                    </td>
-                                    <td className="py-4 px-6">
-                                        <a href="/" className="font-medium text-blue-600  hover:underline">Update</a>
-                                    </td>
-                                    <td className="py-4 px-6">
-                                        <button className="font-medium text-blue-600 hover:text-black" onClick={() => handleDelete(hobby._id)}>Delete</button>
-                                    </td>
-                                </tr>
-                            )
-                        }
-                    </tbody>
-                </table>
-                <Toaster />
-            </div>
-            :
-            <h1 className='text-3xl mt-6 font-bold text-gray-600'>No data found, please insert data</h1>
-    }
+                hobbies.length > 0 &&
+                <div className="overflow-x-auto relative shadow-md sm:rounded-lg md:mx-auto md:my-20">
+                    <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                            <tr>
+                                <th scope="col" className="p-4">
+                                </th>
+                                <th scope="col" className="py-3 px-6">
+                                    Serial
+                                </th>
+                                <th scope="col" className="py-3 px-6">
+                                    Name
+                                </th>
+                                <th scope="col" className="py-3 px-6">
+                                    Phone number
+                                </th>
+                                <th scope="col" className="py-3 px-6">
+                                    Email
+                                </th>
+                                <th scope="col" className="py-3 px-6">
+                                    Hobbies
+                                </th>
+                                <th scope="col" className="py-3 px-6">
+                                    Action
+                                </th>
+                                <th scope="col" className="py-3 px-6">
+                                    Action
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                hobbies.map((hobby, i) =>
+                                    <tr className="bg-white border-b  hover:bg-gray-50" key={hobby._id}>
+                                        <td className="p-4 w-4">
+                                            <div className="flex items-center">
+                                                <input id={`checkbox-table-search-${i + 1}`} type="checkbox" className="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500" onClick={(e) => handleChecked(e, hobby)} />
+                                                <label htmlFor="checkbox-table-search-1" className="sr-only">checkbox</label>
+                                            </div>
+                                        </td>
+                                        <td className="py-4 px-6">
+                                            {i + 1}
+                                        </td>
+                                        <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap">
+                                            {hobby.name}
+                                        </th>
+                                        <td className="py-4 px-6">
+                                            {hobby.email}
+                                        </td>
+                                        <td className="py-4 px-6">
+                                            {hobby.number}
+                                        </td>
+                                        <td className="py-4 px-6">
+                                            {hobby.hobbies}
+                                        </td>
+                                        <td className="py-4 px-6">
+                                            <a href="/" className="font-medium text-blue-600  hover:underline">Update</a>
+                                        </td>
+                                        <td className="py-4 px-6">
+                                            <button className="font-medium text-blue-600 hover:text-black" onClick={() => handleDelete(hobby._id)}>Delete</button>
+                                        </td>
+                                    </tr>
+                                )
+                            }
+                        </tbody>
+                    </table>
+                    <Toaster />
+                </div>
+            }
 
         </div >
     );
